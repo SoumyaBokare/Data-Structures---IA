@@ -3,12 +3,11 @@
 #include<string.h>
 
 
-#define N 100 /* Defining the variables that will be used in the program and the maximum number of people*/
+#define N 100                                 /* Defining the variables that will be used in the program and the maximum number of people*/
 #define min(i, j) (((i) < (j)) ? (i) : (j))
 
 #define HASH_SIZE 101 /* Hash table size */
 
-/* Hash function */
 unsigned int hash(char* str)
 {
     unsigned int hashval = 0;
@@ -19,7 +18,6 @@ unsigned int hash(char* str)
     return hashval % HASH_SIZE;
 }
 
-/* Hash table entry */
 typedef struct hash_entry
 {
     char name[N];
@@ -27,11 +25,9 @@ typedef struct hash_entry
     struct hash_entry* next;
 } hash_entry;
 
-/* Hash table */
 hash_entry* hash_table[HASH_SIZE];
 
-/* Insert a person into the hash table */
-void insert_person(char* name, int index)
+void insert_person(char* name, int index)  /* Insert a person into the hash table */
 {
     unsigned int hashval = hash(name);
     hash_entry* entry = (hash_entry*) malloc(sizeof(hash_entry));
@@ -41,8 +37,8 @@ void insert_person(char* name, int index)
     hash_table[hashval] = entry;
 }
 
-/* Find the index of a person in the people array */
-int find_person(char* name)
+
+int find_person(char* name)  /* Find the index of a person in the people array */
 {
     unsigned int hashval = hash(name);
     hash_entry* entry = hash_table[hashval];
@@ -142,8 +138,6 @@ int main()
     {
         hash_table[i] = NULL;
     }
-
-    /* Allocate memory for the graph array */
     graph = (int**) malloc(n * sizeof(int*));
     for(int i = 0; i < n; i++)
     {
@@ -175,7 +169,6 @@ int main()
     /* Find the minimum cash flow */
     min_cashflow(graph);
 
-    /* Free memory allocated for the graph array */
     for(int i = 0; i < n; i++)
     {
         free(graph[i]);
